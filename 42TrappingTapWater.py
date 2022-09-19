@@ -1,3 +1,5 @@
+# Create LeftMax and RightMax arrays and use them to calculate the trapped rain water at an index.
+# Time Complexity O(n) and Space Complexity O(n).
 def trap(self, height: List[int]) -> int:
         
         area = 0
@@ -16,3 +18,30 @@ def trap(self, height: List[int]) -> int:
                 area += min(left_max[i], right_max[i]) - height[i]
         
         return area
+
+
+# Two pointer method, use the min of Current LeftMax and RightMax to calculate the rain water to be stored. 
+# Time Complexity O(n) and Space Complexity O(1).
+def trap(self, height: List[int]) -> int:
+        
+     
+        
+        l, r = 0, len(height) - 1
+        leftMax, rightMax = height[l], height[r]
+        res = 0
+        
+        if not height: return 0
+        while l < r:
+            if leftMax < rightMax:
+                l += 1
+                minHeight = min(leftMax, rightMax)
+                if minHeight - height[l] > 0:
+                    res += minHeight - height[l]
+                leftMax = max(leftMax, height[l])
+            else:
+                r -= 1
+                minHeight = min(leftMax, rightMax)
+                if minHeight - height[r] > 0:
+                    res += minHeight - height[r]
+                rightMax = max(rightMax, height[r])
+        return res
