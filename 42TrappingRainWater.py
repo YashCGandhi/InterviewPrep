@@ -1,3 +1,32 @@
+#O(n) Time and O(n) Space
+# Water at Anypoint can be calcuted as min(Lmax, Rmax) - height[i]
+# Calculate the Lmax array and the Rmax array then its a piece of cake.
+def trap(self, height: List[int]) -> int:
+        L, R = [0] * (len(height)), [0]* (len(height))
+        res = 0
+        for i in range(1,len(height)):
+            
+            L[i] = max(L[i-1],height[i-1])
+        
+        for i in range(len(height)-2, -1, -1):
+            R[i] = max(R[i+1],height[i+1])
+            
+        
+        for i in range(len(height)):
+            water = min(L[i],R[i]) - height[i]
+            if water > 0:
+                res += water
+        
+        return res
+
+
+
+
+
+
+
+
+# O(n) Time and O(1) Space.
 def trap(self, height: List[int]) -> int:
         
         # Two pointer method, use the min of Current LeftMax and RightMax to calculate the rain water to be stored.
