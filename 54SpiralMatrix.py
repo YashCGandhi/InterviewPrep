@@ -1,4 +1,4 @@
-def sizeof(self,row,col):
+    def sizeof(self,row,col):
         return row*col
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         left = 0
