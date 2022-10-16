@@ -1,4 +1,4 @@
-count = {}
+        count = {}
         freq = [[] for i in range(len(nums)+1)]
         
         # create a hashmap with each number as key and count as its value
