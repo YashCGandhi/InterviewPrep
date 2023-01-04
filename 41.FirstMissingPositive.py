@@ -1,3 +1,5 @@
+# https://www.youtube.com/watch?v=8g78yfzMlao
+
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         # T: O(N)
