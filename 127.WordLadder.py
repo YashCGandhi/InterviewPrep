@@ -6,12 +6,13 @@ class Solution:
         neighbor = collections.defaultdict(list)
         wordList.append(beginWord)
 
+        # Create a Grahp that connects all the words in the wordList
         for word in wordList:
             for j in range(len(word)):
                 pattern = word[:j] + '*' + word[j+1:]
                 neighbor[pattern].append(word)
 
-
+        # BFS through the graph to check if I reach the endWord.
         visit = set([beginWord])
         q = deque([beginWord])
         res = 1
@@ -29,3 +30,5 @@ class Solution:
                             q.append(neighborWord)
             res += 1
         return 0
+
+        
