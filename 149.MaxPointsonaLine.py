@@ -20,6 +20,7 @@ class Solution:
 
 """
 Has problem with slope='INF'
+Cause: slope = 'inf' happens when x2 = x1 which causes the denominator to go to 0. When you have a global hashmap where you store all the points for a key value(slope), all the slope='inf' points will go together even though their x-coordinates are not the same. Hence use the method above, where a new hashmap in initialized for every i.
 testcase : points = [[3,3],[1,4],[1,1],[2,1],[2,2]]
 
         if len(points) == 1:
