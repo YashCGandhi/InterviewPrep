@@ -1,11 +1,61 @@
-# T : O(n^2)
-# get unique start and end positions and sort them
-# store their x_val and index in a edge_map
-# create a heights array of the len(positions) to store max height at that position
-# loop through the heights and find out where the heights change and add those to the ans
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         
+        edges = []
+
+        for i, building in enumerate(buildings):
+            edges.append([building[0],i])
+            edges.append([building[1],i])
+
+        edges.sort()
+
+        live, ans =[], []
+        idx = 0
+
+        while idx < len(edges):
+            curr_x = edges[idx][0]
+
+            while idx < len(edges) and edges[idx][0] == curr_x:
+
+                b = edges[idx][1]
+
+                if buildings[b][0] == curr_x:
+                    right = buildings[b][1]
+                    height = buildings[b][2]
+
+                    heapq.heappush(live, [-height, right])
+
+                while live and live[0][1] <= curr_x:
+                    heapq.heappop(live)
+                idx += 1
+            max_height = -live[0][0] if live else 0
+
+            if not ans or ans[-1][1] != max_height:
+                ans.append([curr_x, max_height])
+        
+        return ans
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        """
         positions = sorted(list(set([x for building in buildings for x in building[:2]])))
 
         edge_map = { x : i for i, x in enumerate(positions)}
@@ -28,3 +78,4 @@ class Solution:
             if not ans or ans[-1][1] != curr_height:
                 ans.append([curr_x, curr_height])
         return ans
+        """
