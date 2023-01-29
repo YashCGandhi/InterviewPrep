@@ -1,5 +1,5 @@
 class StockSpanner:
-
+    # add into the stack if next.price < prev.price. Otherwise pop form the stack and increment the span.
     def __init__(self):
         self.stack = [] #(price, span)        
 
