@@ -1,3 +1,5 @@
+# Using hashmap and lists ( not smart )
+
 class FileSystem:
 
     def __init__(self):
@@ -51,9 +53,63 @@ class FileSystem:
         return "".join(curr[file])
 
 
-# Your FileSystem object will be instantiated and called as such:
-# obj = FileSystem()
-# param_1 = obj.ls(path)
-# obj.mkdir(path)
-# obj.addContentToFile(filePath,content)
-# param_4 = obj.readContentFromFile(filePath)
+# Usin Trie ( Very smart i.e me :) )
+class TrieNode:
+    def __init__(self):
+        self.content = ""
+        self.children = defaultdict(TrieNode)
+        self.is_file = False
+
+
+class FileSystem:
+
+    def __init__(self):
+        self.root = TrieNode()
+
+    def ls(self, path: str) -> List[str]:
+        dirs = path.split("/")
+        node  = self.root
+
+        for d in dirs:
+            if not d:
+                continue
+            node = node.children.get(d)
+        if node.is_file:
+            return [d]
+        dirs = [i for i in node.children.keys()]
+        if not dirs:
+            return dirs
+        return sorted(dirs)
+
+    def mkdir(self, path: str) -> None:
+        dirs = path.split("/")
+        node = self.root
+
+        for dir in dirs:
+            if not dir:
+                continue
+            node = node.children[dir]
+
+
+    def addContentToFile(self, filePath: str, content: str) -> None:
+        dirs = filePath.split("/")
+        node  = self.root
+
+        for dir in dirs:
+            if not dir:
+                continue
+            node = node.children[dir]
+        node.content += content
+        node.is_file = True
+
+    def readContentFromFile(self, filePath: str) -> str:
+        dirs = filePath.split("/")
+        node = self.root
+
+        for dir in dirs:
+            if not dir:
+                continue
+            node = node.children.get(dir)
+        return node.content
+
+
