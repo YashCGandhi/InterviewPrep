@@ -1,3 +1,38 @@
+# My Code-Solution
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        "Hint : find the O's that will not be flipped"
+        m, n = len(board), len(board[0])
+        visit = set()
+
+        def dfs(r, c):
+            if r < 0 or r >= m or c < 0 or c >= n or (r, c) in visit or board[r][c] != "O":
+                return
+
+            visit.add((r, c))
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+        
+        for i in range(m):
+            dfs(i, 0)
+            dfs(i, n - 1)
+
+        
+        for i in range(n):
+            dfs(0, i)
+            dfs(m - 1, i)
+        
+        for i in range(m):
+            for j in range(n):
+                if (i, j) not in visit:
+                    board[i][j] = "X"
+
+
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
         """
