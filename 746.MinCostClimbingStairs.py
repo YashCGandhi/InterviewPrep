@@ -1,7 +1,6 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        if len(cost) < 3:
-            return min(cost[0], cost[1])
+        
         minCostArray = [0] * (len(cost))
         minCostArray[-1] = cost[-1]
         minCostArray[-2] = cost[-2]
