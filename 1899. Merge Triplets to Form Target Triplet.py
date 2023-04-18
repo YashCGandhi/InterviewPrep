@@ -1,5 +1,24 @@
 class Solution:
     def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
+        # T : O(m * n)
+        if target in triplets:
+            return True
+        trip = [False] * len(target)
+        for t in triplets:
+            if t[0] > target[0] or t[1] > target[1] or t[2] > target[2]:
+                continue
+            
+            for i, v in enumerate(t):
+                if v == target[i]:
+                    trip[i] = True
+            if all(trip):
+                return True
+
+        return False
+
+# I am a noob 
+class Solution:
+    def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
         # T : O(len(triplets * len(target)))
         # Remove the triplets with values greater than target 
         if target in triplets:
